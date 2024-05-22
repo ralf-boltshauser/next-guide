@@ -135,3 +135,6 @@ To call a server action from a client component we can just invoke the function 
 We have two ways to pass data. Either we just pass it as props. Or we can bind the props to the action. Both are shown in the `src/app/components/PostItem.tsx` file.
 
 We adjusted the action to allow a title to be passed, and we pass it in two ways. One through the props and one through the action.
+
+### Possibilities
+This is a very powerful feature. We can use this to call APIs, databases, or any other server side code. This can be used to create a full stack application with NextJs without ever needing API routes and everything is fully typesafe. 
