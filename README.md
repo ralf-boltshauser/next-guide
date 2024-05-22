@@ -55,3 +55,53 @@ For some use-cases we want client components. For example:
 
 But NextJs runs on the server and the server does not have access to the browser. To solve this problem we can use the `"use client";` directive. Check out the `src/app/client/page.tsx` file to see how this is done. In this page we can use, useEffect, useState, useRef and many more hooks.
 If you visit `http://localhost:3000/client` you will see that the console log statement is printed in the browser console but also in the npm run dev console. This is because NextJs preprenders the page and sends it to the browser. The browser then renders the page and the client side code is executed.
+
+# Data Fetching and Mutations
+## Static Site Generation
+NextJs has a few ways to fetch data. The easiest is to fetch data on the server and send the rendered page to the client.
+
+On the page `src/app/posts/page.tsx` we fetch data from an API on the server, render it on the server and send the page to the client. If you disable javascript this still works perfectly fine, which wouldn't be the case, if we fetched this on client side. This also has an incredible advantage for crawlers and SEO. Since the page arrives loaded. Visit it on `http://localhost:3000/posts`.
+
+## Server Side Rendering
+
+If we run `npm run build` we can see a problem. The page is statically rendered. But NextJs doesn't tell us about this problem, because when running in dev mode, this is rerendered on every request. Only when built for prod this becomes static.
+
+```bash
+Route (app)                              Size     First Load JS
+┌ ○ /                                    149 B          87.1 kB
+├ ○ /_not-found                          871 B          87.8 kB
+├ ○ /client                              279 B          87.2 kB
+├ ○ /hello                               149 B          87.1 kB
+├ ○ /posts                               149 B          87.1 kB
+└ ƒ /posts/[id]                          149 B          87.1 kB
++ First Load JS shared by all            87 kB
+  ├ chunks/23-51dfd99b24924880.js        31.5 kB
+  ├ chunks/fd9d1056-2821b0f0cabcd8bd.js  53.6 kB
+  └ other shared chunks (total)          1.86 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+```
+
+This results in the posts page to be the same all the time. To fix this we can add the `export const dynamic = "force-dynamic";` to opt out of static rendering. This will make the page server rendered on demand.
+
+```bash
+
+Route (app)                              Size     First Load JS
+┌ ○ /                                    149 B          87.1 kB
+├ ○ /_not-found                          871 B          87.8 kB
+├ ○ /client                              279 B          87.2 kB
+├ ○ /hello                               149 B          87.1 kB
+├ ƒ /posts                               149 B          87.1 kB
+└ ƒ /posts/[id]                          149 B          87.1 kB
++ First Load JS shared by all            87 kB
+  ├ chunks/23-51dfd99b24924880.js        31.5 kB
+  ├ chunks/fd9d1056-2821b0f0cabcd8bd.js  53.6 kB
+  └ other shared chunks (total)          1.86 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+```
+
