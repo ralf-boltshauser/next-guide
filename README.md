@@ -149,3 +149,15 @@ We also pass the id to the PostItem so we can determine the right link.
 Apart from that we can also just route to specific pages like the back to home link on the `src/app/posts/page.tsx` file.
 
 We added the data fetch also to the posts/[id]/page.tsx file to show that the page is server rendered on demand.
+
+# React Excursion
+## State
+Check out the `src/app/components/PostItem.tsx` to see an example of state.
+## Effect
+We have an example using useEffect to clear the view counter on the `src/app/components/PostItem.tsx` file. The effect is triggered when the views are updated. This means the counter is reset every time the views are updated.
+An Effect function should be cleaned up when the component is unmounted. This can be done by returning a function from the effect function. Check out the `src/app/components/PostItem.tsx` file to see how this is done. This prevents buggy behavior and multiple effects running at the same time.
+## Context
+We have a reading list context which tracks all posts that the user has read. `src/app/components/navbar.tsx` consumes the reading list and displays the info to the user. `src/app/context/ReadingListContext.tsx` is the context file and `src/app/components/PostItem.tsx` is the file that updates the reading list. `src/app/layout.tsx` is the file that provides the context to the whole application.
+
+A context always needs a provider and a consumer. The provider is the parent component that provides the context and the consumer is the child component that consumes the context. The provider is the `ReadingListContext` component and the consumer is the `Navbar` component.
+A context contains its state and the functions to update the state. The state is the reading list and the function is `addToReadingList`.

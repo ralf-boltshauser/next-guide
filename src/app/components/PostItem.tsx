@@ -1,22 +1,38 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { executeServerActionFromClient } from "../actions/postActions";
+import { useReadingList } from "../context/ReadingListContext";
 
-export default function PostItem({
-  id,
-  title,
-  body,
-}: {
+interface PostItemProps {
   id: string;
   title: string;
   body: string;
-}) {
-  const [views, setViews] = useState(0);
+}
+
+const PostItem: React.FC<PostItemProps> = ({ id, title, body }) => {
+  const [views, setViews] = useState<number>(0);
+  const { addToReadingList } = useReadingList();
+
+  // clear the views counter every 10 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setViews(0);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [views]);
+
   const titleAction = executeServerActionFromClient.bind(null, { title });
+
   return (
-    <div onMouseEnter={() => setViews((prev) => prev + 1)}>
+    <div
+      onMouseEnter={() => {
+        setViews((prev) => prev + 1);
+        addToReadingList(title);
+      }}
+    >
       <h2 className="text-2xl font-bold">
         {title}, {views} views
       </h2>
@@ -37,4 +53,6 @@ export default function PostItem({
       </div>
     </div>
   );
-}
+};
+
+export default PostItem;
