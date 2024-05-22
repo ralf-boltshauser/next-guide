@@ -130,3 +130,8 @@ Check out the `src/app/posts/[id]/page.tsx` and `src/app/actions/postActions.ts`
 
 ### From a client component
 To call a server action from a client component we can just invoke the function in an event handler, lets do that. For the `src/app/components/PostItem.tsx` we add a button which will call the server action. We create a second server action because we don't have any form data to pass.
+
+#### Passing data
+We have two ways to pass data. Either we just pass it as props. Or we can bind the props to the action. Both are shown in the `src/app/components/PostItem.tsx` file.
+
+We adjusted the action to allow a title to be passed, and we pass it in two ways. One through the props and one through the action.

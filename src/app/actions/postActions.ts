@@ -5,6 +5,10 @@ export async function executeServerAction(formData: FormData) {
   console.log("server action id:", id);
 }
 
-export async function executeServerActionFromClient() {
-  console.log("server action from client");
+export async function executeServerActionFromClient({
+  title,
+}: {
+  title: string;
+}) {
+  console.log("server action from client, id:", title);
 }
