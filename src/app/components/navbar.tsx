@@ -1,13 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { useReadingList } from "../context/ReadingListContext";
 
 export default function Navbar() {
   const { readingList } = useReadingList();
   return (
-    <nav className="flex flex-row justify-between">
-      <h1>My Posts</h1>
-      <div className="absolute top-0 right-0 w-64">
+    <nav className="flex  flex-row justify-between">
+      <Link href="/">
+        <h1 className="border-b mb-5">My Posts</h1>
+      </Link>
+      <div className="absolute top-5 right-5 w-64">
         <span>Reading List ({readingList.length})</span>
         <ul>
           {readingList.map((title, index) => (
