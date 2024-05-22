@@ -1,3 +1,4 @@
+import Link from "next/link";
 import PostItem from "../components/PostItem";
 
 async function getData() {
@@ -24,9 +25,15 @@ export default async function Posts() {
       <h1>Posts</h1>
       <div>
         {posts.map((post: any) => (
-          <PostItem key={post.id} title={post.title} body={post.body} />
+          <PostItem
+            key={post.id}
+            id={post.id}
+            title={post.title}
+            body={post.body}
+          />
         ))}
       </div>
+      <Link href={"/"}>Back to home</Link>
     </div>
   );
 }

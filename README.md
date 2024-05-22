@@ -138,3 +138,14 @@ We adjusted the action to allow a title to be passed, and we pass it in two ways
 
 ### Possibilities
 This is a very powerful feature. We can use this to call APIs, databases, or any other server side code. This can be used to create a full stack application with NextJs without ever needing API routes and everything is fully typesafe. 
+
+# Navigation
+Use the Link component to navigate between pages. This is a client side navigation. This is the recommended way to navigate between pages in a NextJs application. It automatically pre-loads pages and is very fast.
+
+Lets add a link to the posts page which opens posts in the detail page. We add the link to the `src/app/components/PostItem.tsx` file.
+
+We also pass the id to the PostItem so we can determine the right link.
+
+Apart from that we can also just route to specific pages like the back to home link on the `src/app/posts/page.tsx` file.
+
+We added the data fetch also to the posts/[id]/page.tsx file to show that the page is server rendered on demand.

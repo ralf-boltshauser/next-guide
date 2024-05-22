@@ -1,12 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { executeServerActionFromClient } from "../actions/postActions";
 
 export default function PostItem({
+  id,
   title,
   body,
 }: {
+  id: string;
   title: string;
   body: string;
 }) {
@@ -18,16 +21,20 @@ export default function PostItem({
         {title}, {views} views
       </h2>
       <p>{body}</p>
-      <button
-        className="border-2 p-1 my-2"
-        onClick={() => executeServerActionFromClient({ title })}
-      >
-        Action with params
-      </button>
-      <br />
-      <button className="border-2 p-1 my-2" onClick={() => titleAction()}>
-        Bound action
-      </button>
+      <div className="flex flex-row gap-4">
+        <button
+          className="border-2 p-1 my-2"
+          onClick={() => executeServerActionFromClient({ title })}
+        >
+          Action with params
+        </button>
+        <button className="border-2 p-1 my-2" onClick={() => titleAction()}>
+          Bound action
+        </button>
+        <Link className="border-2 p-1 my-2" href={`/posts/${id}`}>
+          Open Post
+        </Link>
+      </div>
     </div>
   );
 }
