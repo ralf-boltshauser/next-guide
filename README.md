@@ -127,3 +127,6 @@ The action is created in `src/app/actions/postActions.ts` but it doesn't have an
 To pass data to the server action we can use hidden inputs on the form, and form data on the server action.
 
 Check out the `src/app/posts/[id]/page.tsx` and `src/app/actions/postActions.ts` to see how this is done.
+
+### From a client component
+To call a server action from a client component we can just invoke the function in an event handler, lets do that. For the `src/app/components/PostItem.tsx` we add a button which will call the server action. We create a second server action because we don't have any form data to pass.

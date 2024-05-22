@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { executeServerActionFromClient } from "../actions/postActions";
 
 export default function PostItem({
   title,
@@ -16,6 +17,7 @@ export default function PostItem({
         {title}, {views} views
       </h2>
       <p>{body}</p>
+      <button onClick={() => executeServerActionFromClient()}>Action</button>
     </div>
   );
 }
