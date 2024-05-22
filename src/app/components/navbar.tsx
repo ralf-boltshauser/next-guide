@@ -10,7 +10,7 @@ export default function Navbar() {
       <Link href="/">
         <h1 className="border-b mb-5">My Posts</h1>
       </Link>
-      <div className="absolute top-5 right-5 w-64">
+      <div className="absolute bg-black/90 p-3 top-5 right-5 w-64">
         <span>Reading List ({readingList.length})</span>
         <ul>
           {readingList.map((title, index) => (

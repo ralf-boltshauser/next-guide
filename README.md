@@ -116,6 +116,11 @@ If you disable javascript in your browser (open the console, and then press cmd+
 
 ## Server Actions
 To mutate data on the server we can use server actions. 
+
+If server actions alter data that is displayed to the user you need to use `revalidatePath("/posts")` at the end of the action to tell NextJs that the page needs to be revalidated. This will cause the page to be re-rendered on the server and the new data will be displayed to the user.
+
+Since we are not making any data mutation we are not using this.
+
 ### From a server component
 On the page `src/app/posts/[id]/page.tsx` we implement a server action which will just call a server console log statement.
 
@@ -153,9 +158,15 @@ We added the data fetch also to the posts/[id]/page.tsx file to show that the pa
 # React Excursion
 ## State
 Check out the `src/app/components/PostItem.tsx` to see an example of state.
+
+We first initialize the state with `useState` and then we can update the state with the `setViews` function. This will rerender the component and show the new state.
+
 ## Effect
 We have an example using useEffect to clear the view counter on the `src/app/components/PostItem.tsx` file. The effect is triggered when the views are updated. This means the counter is reset every time the views are updated.
 An Effect function should be cleaned up when the component is unmounted. This can be done by returning a function from the effect function. Check out the `src/app/components/PostItem.tsx` file to see how this is done. This prevents buggy behavior and multiple effects running at the same time.
+
+useEffect is called every time its dependencies change. If you want to run the effect only once, you can pass an empty array as the second argument. In our example we pass the views as the second argument, so the effect is only called when the views change.
+
 ## Context
 We have a reading list context which tracks all posts that the user has read. `src/app/components/navbar.tsx` consumes the reading list and displays the info to the user. `src/app/context/ReadingListContext.tsx` is the context file and `src/app/components/PostItem.tsx` is the file that updates the reading list. `src/app/layout.tsx` is the file that provides the context to the whole application.
 
