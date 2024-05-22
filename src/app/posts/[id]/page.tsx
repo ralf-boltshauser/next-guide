@@ -1,3 +1,5 @@
+import { executeServerAction } from "@/app/actions/postActions";
+
 export default function Post({
   params,
 }: {
@@ -5,5 +7,12 @@ export default function Post({
     id: string;
   };
 }) {
-  return <div>Post {params.id}</div>;
+  return (
+    <div>
+      <h2>Post {params.id}</h2>
+      <form action={executeServerAction}>
+        <button>submit server action</button>
+      </form>
+    </div>
+  );
 }

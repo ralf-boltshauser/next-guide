@@ -113,3 +113,13 @@ We create it at `src/app/components/PostItem.tsx` and integrate it in the map at
 If you disable javascript in your browser (open the console, and then press cmd+shift+p and type disable javascript) you will see that the view counter doesn't work anymore. This is because the client side code is not executed. Nonetheless the page is still rendered and the data is still there because it is prerendered on the server.
 
 "enable javascript" to reenable javascript.
+
+## Server Actions
+To mutate data on the server we can use server actions. 
+### From a server component
+On the page `src/app/posts/[id]/page.tsx` we implement a server action which will just call a server console log statement.
+
+This can be achieved through a form and it's form action.
+
+The action is created in `src/app/actions/postActions.ts` but it doesn't have any naming conventions or positioning. It needs to be a ts file, which has the "use server" directive at the very top and export async functions. Those can then be passed to the form action.
+
