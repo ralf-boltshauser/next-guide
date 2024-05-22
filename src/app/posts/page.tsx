@@ -1,3 +1,5 @@
+import PostItem from "../components/PostItem";
+
 async function getData() {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
   // The return value is *not* serialized
@@ -22,10 +24,7 @@ export default async function Posts() {
       <h1>Posts</h1>
       <div>
         {posts.map((post: any) => (
-          <div key={post.id} className="my-3">
-            <h2 className="text-xl font-bold">{post.title}</h2>
-            <p>{post.body}</p>
-          </div>
+          <PostItem key={post.id} title={post.title} body={post.body} />
         ))}
       </div>
     </div>

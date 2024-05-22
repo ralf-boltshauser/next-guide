@@ -105,3 +105,11 @@ Route (app)                              Size     First Load JS
 ƒ  (Dynamic)  server-rendered on demand
 ```
 
+## Client Side Rendering
+The easiest way to render data in a client component is to pass the data to it. Lets create a post item component which is a client component.
+
+We create it at `src/app/components/PostItem.tsx` and integrate it in the map at `src/app/posts/page.tsx`. We added a view counter which increments every time the mouse hovers over the post item. This is a client side rendered component. Visit `http://localhost:3000/posts` to see the component. This data is lost as soon as the page is reloaded.
+
+If you disable javascript in your browser (open the console, and then press cmd+shift+p and type disable javascript) you will see that the view counter doesn't work anymore. This is because the client side code is not executed. Nonetheless the page is still rendered and the data is still there because it is prerendered on the server.
+
+"enable javascript" to reenable javascript.
