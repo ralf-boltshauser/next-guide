@@ -11,3 +11,12 @@ Ok to proceed? (y) y
 ✔ Would you like to use App Router? (recommended) … No / Yes
 ✔ Would you like to customize the default import alias (@/*)? … No / Yes 
 ```
+
+# Basic Routing
+Start the app
+```bash
+npm run dev
+```
+go on `http://localhost:3000/` and you will see the root page located at `src/app/page.tsx`. But this page is actually not the only thing that is rendered. It is rendered as children of all parent or sibling layouts. In this case the `src/app/layout.tsx`.
+
+NextJs uses file based routing, to show this you can navigate to `http://localhost:3000/hello` and you will see the about page located at `src/app/hello/page.tsx`. This is because the route is folder based and within the hello folder there is a page.tsx. This always has to be called page.tsx, there are other conventions like route.ts or loading.tsx which we will see later.
