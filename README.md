@@ -46,3 +46,12 @@ Route (app)                              Size     First Load JS
 Which tells you that the hello page is static prerenderd. Which means that it is rendered at build time and the content is the same for all users. The posts page is server rendered on demand. This means that the content is rendered on the server and the content can be different for each user.
 
 To prove that they are server rendered we can add a console log statement to the root page `src/app/page.tsx` and see that the statement is printed in the npm run dev console and not in the browser console. Visit `http://localhost:3000` to see the statement.
+
+# Client Side Rendering
+For some use-cases we want client components. For example: 
+- Components that need to validate user input with interactive error messages
+- Animated components that react to user behavior like drag and drop
+- many more
+
+But NextJs runs on the server and the server does not have access to the browser. To solve this problem we can use the `"use client";` directive. Check out the `src/app/client/page.tsx` file to see how this is done. In this page we can use, useEffect, useState, useRef and many more hooks.
+If you visit `http://localhost:3000/client` you will see that the console log statement is printed in the browser console but also in the npm run dev console. This is because NextJs preprenders the page and sends it to the browser. The browser then renders the page and the client side code is executed.
